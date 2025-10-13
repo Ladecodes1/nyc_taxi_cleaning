@@ -12,12 +12,12 @@ class CustomSorter {
     sortData(data, sortBy = 'pickup_datetime', sortOrder = 'desc', algo = 'quick') {
         if (!data || data.length === 0) return [];
 
-        console.log(`🔄 Sorting ${data.length} records by ${sortBy} (${sortOrder})`);
+        console.log(`Sorting ${data.length} records by ${sortBy} (${sortOrder})`);
 
         const sortFn = this.algorithms[algo] || this.quickSort;
         const sorted = sortFn.call(this, [...data], sortBy, sortOrder);
 
-        console.log(`✅ Done`);
+        console.log(`Done`);
         return sorted;
     }
 
@@ -120,12 +120,12 @@ class CustomSorter {
     }
 
     compare(a, b, order) {
-        // Handle nulls
+        // Handling null values
         if (a === null || a === undefined) return 1;
         if (b === null || b === undefined) return -1;
         if (a === null && b === null) return 0;
 
-        // Handle different types
+        // Handling different types
         if (typeof a === 'string' && typeof b === 'string') {
             // Date strings
             if (this.isDate(a) && this.isDate(b)) {
@@ -144,7 +144,7 @@ class CustomSorter {
             return order === 'desc' ? -res : res;
         }
 
-        // Try converting to numbers
+        // Trying to convert to numbers
         const numA = parseFloat(a);
         const numB = parseFloat(b);
         if (!isNaN(numA) && !isNaN(numB)) {
@@ -175,7 +175,7 @@ class CustomSorter {
             }
         });
 
-        console.log(`✅ Filtered to ${filtered.length} records`);
+        console.log(`Filtered to ${filtered.length} records`);
         return filtered;
     }
 
@@ -230,7 +230,7 @@ class CustomSorter {
     multiSort(data, criteria) {
         if (!data || data.length === 0) return [];
 
-        console.log(`🔄 Multi-sort on ${data.length} records`);
+        console.log(`Multi-sort on ${data.length} records`);
 
         return [...data].sort((a, b) => {
             for (const c of criteria) {
