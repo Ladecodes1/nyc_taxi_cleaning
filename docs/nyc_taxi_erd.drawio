@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="FHcKv3t5OukUzqbkG1S1">
+    <mxGraphModel dx="1089" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-69" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="ZOo4b4yMg3xbej3iWocw-63" target="ZOo4b4yMg3xbej3iWocw-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-58" value="Trips" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="200" width="390" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-59" value="[PK] trip_no&lt;br&gt;&lt;br&gt;+pickup_timedate&lt;br&gt;+arrival_timedate&lt;br&gt;+passenger_count&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;font face=&quot;SF Mono, Monaco, Menlo, Courier, monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;+piu_latitude&lt;br&gt;+piu_longitude&lt;br&gt;+arv_latitude&lt;br&gt;+arv_longitude&lt;br&gt;&lt;br&gt;+trip_period_sec&lt;br&gt;trip_period_min&lt;br&gt;+trip_dist_km&lt;br&gt;trip_speed_kmh&lt;br&gt;distance_per_passenger&lt;br&gt;&lt;br&gt;piu_hour&lt;br&gt;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-family: &amp;quot;SF Mono&amp;quot;, Monaco, Menlo, Courier, monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;piu_day&lt;br&gt;&lt;/span&gt;&lt;font face=&quot;SF Mono, Monaco, Menlo, Courier, monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;piu_month&lt;/span&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font face=&quot;SF Mono, Monaco, Menlo, Courier, monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;[FK] vnd_id → vendors(vnd_id)&lt;br&gt;[FK] rate_cd_id → rate_cds(rate_cd_id)&lt;br&gt;[FK] pyt_type_id → payment_types(pyt_type_id)&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;SF Mono, Monaco, Menlo, Courier, monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="ZOo4b4yMg3xbej3iWocw-58">
+          <mxGeometry y="50" width="390" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-62" value="payment_types" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="660" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-63" value="[PK] pyt_type_id&lt;br&gt;+description" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="ZOo4b4yMg3xbej3iWocw-62">
+          <mxGeometry y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-64" value="rate_cds" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="390" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-65" value="[PK] rate_cd_id&lt;br&gt;+descrption" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="ZOo4b4yMg3xbej3iWocw-64">
+          <mxGeometry y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-66" value="Vendors" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="240" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-67" value="[PK] vnd_id&lt;br&gt;+vendor_name" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="ZOo4b4yMg3xbej3iWocw-66">
+          <mxGeometry y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-80" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="ZOo4b4yMg3xbej3iWocw-66" source="ZOo4b4yMg3xbej3iWocw-67" target="ZOo4b4yMg3xbej3iWocw-67">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-84" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;startSize=8;endSize=8;curved=0;entryX=0.005;entryY=0.835;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;" edge="1" parent="1" source="ZOo4b4yMg3xbej3iWocw-67" target="ZOo4b4yMg3xbej3iWocw-59">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="470" y="440" as="sourcePoint" />
+            <mxPoint x="490" y="320" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="480" y="450" />
+              <mxPoint x="520" y="500" />
+              <mxPoint x="500" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-85" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;startSize=8;endSize=8;curved=0;entryX=0.005;entryY=0.835;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;" edge="1" parent="1" source="ZOo4b4yMg3xbej3iWocw-63">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="648" y="340" as="sourcePoint" />
+            <mxPoint x="770" y="616" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="478" y="482" />
+              <mxPoint x="518" y="532" />
+              <mxPoint x="498" y="542" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZOo4b4yMg3xbej3iWocw-86" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;startSize=8;endSize=8;curved=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.999;entryY=0.888;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;" edge="1" parent="1" source="ZOo4b4yMg3xbej3iWocw-65" target="ZOo4b4yMg3xbej3iWocw-59">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="1240" y="550" as="sourcePoint" />
+            <mxPoint x="1260" y="630" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1070" y="692" />
+              <mxPoint x="1110" y="742" />
+              <mxPoint x="1090" y="752" />
+              <mxPoint x="1300" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
