@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NYC Taxi Mobility Explorer</title>
+
+  <!-- Leaflet + heat + Chart.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NYC Taxi Mobility Explorer</h1>
+      <p class="subtitle">Explore mobility patterns with maps and charts</p>
+    </header>
+
+    <div class="filters-panel">
+      <h2>Filter & Analyze</h2>
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="dateFrom">Date From</label>
+          <input type="date" id="dateFrom">
+        </div>
+        <div class="filter-group">
+          <label for="dateTo">Date To</label>
+          <input type="date" id="dateTo">
+        </div>
+        <div class="filter-group">
+          <label for="minDistance">Min Distance (km)</label>
+          <input type="number" id="minDistance" placeholder="0" step="0.1">
+        </div>
+        <div class="filter-group">
+          <label for="maxDistance">Max Distance (km)</label>
+          <input type="number" id="maxDistance" placeholder="100" step="0.1">
+        </div>
+        <div class="filter-group">
+          <label for="minFare">Min Fare ($)</label>
+          <input type="number" id="minFare" placeholder="0" step="0.5">
+        </div>
+        <div class="filter-group">
+          <label for="maxFare">Max Fare ($)</label>
+          <input type="number" id="maxFare" placeholder="500" step="0.5">
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+        <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+      </div>
+    </div>
+
+    <div id="error-message"></div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Trips</div>
+        <div class="stat-value" id="totalTrips">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Distance</div>
+        <div class="stat-value" id="avgDistance">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Fare</div>
+        <div class="stat-value" id="avgFare">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Duration</div>
+        <div class="stat-value" id="avgDuration">-</div>
+      </div>
+    </div>
+
+    <div class="visualizations">
+      <div class="viz-card full-width">
+        <h3>🗺️ Pickup Location Heatmap</h3>
+        <div id="map"></div>
+      </div>
+
+      <div class="viz-card">
+        <h3>Trip Duration Distribution</h3>
+        <div class="chart-container">
+          <canvas id="durationChart"></canvas>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <h3>Fare Distribution</h3>
+        <div class="chart-container">
+          <canvas id="fareChart"></canvas>
+        </div>
+      </div>
+
+      <div class="viz-card full-width">
+        <h3>Trips Per Hour (Time Series)</h3>
+        <div class="chart-container">
+          <canvas id="timeSeriesChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
