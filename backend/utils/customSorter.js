@@ -45,6 +45,7 @@ const compare = (a, b, order) => {
     return order === 'desc' ? -result : result;
 };
 
+// Check if string is a date
 const isDate = (str) => {
     return !isNaN(Date.parse(str));
 };
@@ -94,7 +95,6 @@ const applyFilter = (data, field, val) => {
             return values.includes(String(itemVal));
         }
 
-        // Exact match
         return String(itemVal) === String(val);
     });
 };
