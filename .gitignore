@@ -1,1 +1,6 @@
 data/
+logs/*.csv
+.venv/
+node_modules/
+*.env
+*.log
