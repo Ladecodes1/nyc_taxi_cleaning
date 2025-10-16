@@ -12,11 +12,50 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
+  <nav class="topnav">
+    <button class="icon-btn" aria-label="Toggle sidebar" onclick="toggleSidebar()">☰</button>
+    <div class="brand">
       <h1>NYC Taxi Mobility Explorer</h1>
       <p class="subtitle">Explore mobility patterns with maps and charts</p>
-    </header>
+    </div>
+    <div class="topnav-actions">
+      <span class="project-chip">NYC Taxi Mobility Explorer</span>
+      <button class="btn btn-secondary" id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+      <button class="btn btn-secondary" onclick="exportCSV()">Export CSV</button>
+    </div>
+  </nav>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Dashboard</div>
+      <ul class="sidebar-links">
+        <li><a href="#overview" onclick="scrollToSection('overview')">Overview</a></li>
+        <li><a href="#mapSection" onclick="scrollToSection('mapSection')">Pickup Heatmap</a></li>
+        <li><a href="#chartsSection" onclick="scrollToSection('chartsSection')">Analytics</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Quick Zoom</div>
+      <div class="sidebar-actions">
+        <button class="btn btn-secondary" onclick="quickZoom('manhattan')">Manhattan</button>
+        <button class="btn btn-secondary" onclick="quickZoom('brooklyn')">Brooklyn</button>
+        <button class="btn btn-secondary" onclick="quickZoom('queens')">Queens</button>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Filter Presets</div>
+      <div class="preset-row">
+        <input type="text" id="presetName" placeholder="Preset name" />
+        <button class="btn btn-primary" onclick="savePreset()">Save</button>
+      </div>
+      <div class="preset-row">
+        <select id="presetSelect"></select>
+        <button class="btn btn-secondary" onclick="loadPreset()">Load</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="container">
 
     <div class="filters-panel">
       <h2>Filter & Analyze</h2>
@@ -74,13 +113,13 @@
       </div>
     </div>
 
-    <div class="visualizations">
+    <div class="visualizations" id="mapSection">
       <div class="viz-card full-width">
         <h3>🗺️ Pickup Location Heatmap</h3>
         <div id="map"></div>
       </div>
 
-      <div class="viz-card">
+      <div class="viz-card" id="chartsSection">
         <h3>Trip Duration Distribution</h3>
         <div class="chart-container">
           <canvas id="durationChart"></canvas>

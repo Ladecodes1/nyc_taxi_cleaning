@@ -8,11 +8,13 @@ const MOCK_SIZE = 800;
 let map, heatLayer;
 let durationChart, fareChart, timeSeriesChart;
 let tripsData = [];
+let isSidebarOpen = true;
 
 // start
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initCharts();
+  initUI();
   if (USE_MOCK_DATA) {
     generateMock().then(d => {
       tripsData = d;
@@ -136,6 +138,7 @@ function renderAll(data) {
   renderDuration(data);
   renderFare(data);
   renderTimes(data);
+  window.lastRendered = data;
 }
 
 function renderStats(data) {
@@ -217,4 +220,127 @@ function showLoading() {
 function hideLoading() { /* charts will show themselves */ }
 function showError(msg) {
   document.getElementById('error-message').innerHTML = `<div class="error">${msg}</div>`;
+}
+
+// Layout + actions
+function initUI() {
+  // populate preset dropdown from localStorage
+  refreshPresetOptions();
+  // apply persisted theme
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  if (savedTheme === 'dark') document.body.classList.add('theme-dark');
+}
+
+function toggleSidebar() {
+  isSidebarOpen = !isSidebarOpen;
+  const el = document.getElementById('sidebar');
+  if (!el) return;
+  el.classList.toggle('hidden', !isSidebarOpen);
+  // give layout time to settle before recalculating map size
+  setTimeout(() => { if (map) map.invalidateSize(false); }, 250);
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('theme-dark');
+  const isDark = document.body.classList.contains('theme-dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
+// Quick zooms
+const QUICK_ZOOMS = {
+  manhattan: { center: [40.7831, -73.9712], zoom: 12 },
+  brooklyn: { center: [40.6782, -73.9442], zoom: 12 },
+  queens: { center: [40.7282, -73.7949], zoom: 11 }
+};
+function quickZoom(area) {
+  const cfg = QUICK_ZOOMS[area];
+  if (!cfg || !map) return;
+  map.setView(cfg.center, cfg.zoom);
+}
+
+// Resize handling to keep map/charts fitting the screen
+window.addEventListener('resize', () => {
+  if (map) map.invalidateSize(false);
+});
+
+// Presets
+function currentFilterValues() {
+  return {
+    dateFrom: document.getElementById('dateFrom').value,
+    dateTo: document.getElementById('dateTo').value,
+    minDistance: document.getElementById('minDistance').value,
+    maxDistance: document.getElementById('maxDistance').value,
+    minFare: document.getElementById('minFare').value,
+    maxFare: document.getElementById('maxFare').value
+  };
+}
+
+function setFilterValues(v) {
+  document.getElementById('dateFrom').value = v.dateFrom || '';
+  document.getElementById('dateTo').value = v.dateTo || '';
+  document.getElementById('minDistance').value = v.minDistance || '';
+  document.getElementById('maxDistance').value = v.maxDistance || '';
+  document.getElementById('minFare').value = v.minFare || '';
+  document.getElementById('maxFare').value = v.maxFare || '';
+}
+
+function savePreset() {
+  const name = (document.getElementById('presetName').value || '').trim();
+  if (!name) { showError('Enter a preset name.'); return; }
+  const presets = JSON.parse(localStorage.getItem('presets') || '{}');
+  presets[name] = currentFilterValues();
+  localStorage.setItem('presets', JSON.stringify(presets));
+  refreshPresetOptions(name);
+}
+
+function loadPreset() {
+  const select = document.getElementById('presetSelect');
+  const key = select && select.value;
+  const presets = JSON.parse(localStorage.getItem('presets') || '{}');
+  const val = presets[key];
+  if (!val) { showError('No preset selected.'); return; }
+  setFilterValues(val);
+  applyFilters();
+}
+
+function refreshPresetOptions(selectName) {
+  const select = document.getElementById('presetSelect');
+  if (!select) return;
+  const presets = JSON.parse(localStorage.getItem('presets') || '{}');
+  select.innerHTML = '';
+  Object.keys(presets).forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name; opt.textContent = name;
+    if (selectName && selectName === name) opt.selected = true;
+    select.appendChild(opt);
+  });
+}
+
+// Export CSV
+function exportCSV() {
+  const rows = [
+    ['id','pickup_datetime','pickup_lat','pickup_lon','distance','fare','duration']
+  ];
+  for (const t of (window.lastRendered || tripsData)) {
+    rows.push([
+      t.id,
+      t.pickup_datetime || t.timestamp || t.date || '',
+      t.pickup_lat || t.lat || t.latitude || '',
+      t.pickup_lon || t.lon || t.longitude || '',
+      t.distance || t.trip_distance || '',
+      t.fare || t.fare_amount || '',
+      t.duration || t.trip_duration || ''
+    ]);
+  }
+  const csv = rows.map(r => r.map(x => (x===undefined||x===null)?'':String(x).replaceAll('"','""')).map(x=>`"${x}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'nyc_taxi_export.csv'; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 0);
 }
