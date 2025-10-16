@@ -1,4 +1,5 @@
 # 🗽 NYC Taxi Cleaning & Data Explorer
+This is the link to the video walkthrough - https://www.loom.com/share/f9305644337041f3b6e1ad4c139f644c?sid=572eb1e8-db06-4361-9de8-8a82b4ddfb1e
 
 This repository contains a complete project for **cleaning**, **analyzing**, and **visualizing** New York City Taxi trip data.
 
